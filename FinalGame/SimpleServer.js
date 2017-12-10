@@ -12,7 +12,8 @@
  
 // Parameters
 var sitePath = process.argv[2] || ".";
-var port = 4200;
+// var port = 4200;
+const port = process.env.PORT || 4200;
  
 // Libraries
 var express = require('express');
