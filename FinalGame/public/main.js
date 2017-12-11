@@ -70,8 +70,7 @@ function spawnSun(){
                 5000, Phaser.Easing.Quadratic.InOut, true);}, this);
         sun3.scale.setTo(0.2, 0.2);
         sun3.body.setCircle(95);
-        sun3.body.collideWorldBounds = true;
-        
+        sun3.body.collideWorldBounds = true;   
 }
 
 function spawnAsteroids(){
@@ -87,7 +86,7 @@ function update(){
         console.log('boom');
     }
 
-    if (game.physics.arcade.distanceToPointer(ball) > ball.radius/4) {
+    if (game.physics.arcade.distanceToPointer(ball) > ball.width/4) {
         game.physics.arcade.moveToPointer(ball, 350);
     }
     else {
