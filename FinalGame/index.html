@@ -1,35 +1,29 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title>Agario Clone</title>
-    <script src="public/phaser.min.js"></script>    
+    <script src="public/phaser.min.js"></script>
 </head>
 
 <body ng-app="app">
-    <div class="content">
+
+    <div navbar></div>
+    <div overlay-bar></div>
+    <div class='content'>
         <div ui-view></div>
     </div>
-    <div>
-        <div class="panel play" 
-            ng-repeat="room in ctrl.rooms track by room.id"
-            ui-sref='game.play({id: room.id})'>
-            <span ng-bind="room.players.length"></span> Players
-        </div>
-        <div class="panel create" 
-            ui-sref='game.play({id: ctrl.createId()})'>
-            <a>Create a game</a>
-        </div>
-    </div>
+
     <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
-    <script type="text/javascript" src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>      
+    <script type="text/javascript" src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script type="text/javascript" src="public/ng-game.js"></script>
     <script type="text/javascript" src="public/game/main.js"></script>
-    <script type="text/javascript" src="public/menu/index.js"></script>  
-    <script type="text/javascript" src="public/menu/menu_controller.js"></script>  
-    <script type="text/javascript" src="public/game/index.js"></script>  
-    <script type="text/javascript" src="public/game/game_controller.js"></script>  
-    
+    <script type="text/javascript" src="public/menu/index.js"></script>
+    <script type="text/javascript" src="public/menu/menu_controller.js"></script>
+    <script type="text/javascript" src="public/game/index.js"></script>
+    <script type="text/javascript" src="public/game/game_controller.js"></script>
+
 </body>
 
 </html>
