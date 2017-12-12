@@ -4,7 +4,7 @@ angular.module('app.menu', [])
   $stateProvider
     .state('menu', {
       url: '',
-      template: 'public/menu/main.html',
+      templateUrl: '/public/menu/main.html',
       controller: 'MenuController as ctrl'
     });
 });
