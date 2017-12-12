@@ -1,6 +1,7 @@
 angular.module('app',[
     'ui.router',
-    'app.menu'
+    'app.menu',
+    'app.game'
 ]);
 
 // Create a new Phaser game object with a single state that has 3 functions
