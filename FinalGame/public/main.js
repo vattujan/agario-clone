@@ -1,3 +1,8 @@
+angular.module('app',[
+    'ui.router',
+    'app.menu'
+]);
+
 // Create a new Phaser game object with a single state that has 3 functions
 var game = new Phaser.Game(800, 800, Phaser.AUTO, '', {
     preload: preload,

@@ -5,11 +5,13 @@
   "main": "SimpleServer.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-  "start": "node SimpleServer"
+    "start": "node SimpleServer"
   },
   "author": "Yogesh",
   "license": "ISC",
   "dependencies": {
+    "angular": "^1.6.7",
+    "angular-ui-router": "^0.4.3",
     "express": "^4.16.2",
     "socket.io": "^2.0.4"
   }

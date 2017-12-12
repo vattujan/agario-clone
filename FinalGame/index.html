@@ -6,8 +6,14 @@
     <script src="public/phaser.min.js"></script>    
 </head>
 
-<body>
-    <script src="public/main.js"></script>
+<body ng-app="app">
+    <div class="content">
+        <div ui-view></ui-view>
+    </div>
+    <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>        
+    <script type="text/javascript" src="public/main.js"></script>
+    <script type="text/javascript" src="public/menu/index.js"></script>    
 </body>
 
 </html>
