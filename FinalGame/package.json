@@ -2,10 +2,10 @@
   "name": "finalgame",
   "version": "1.0.0",
   "description": "",
-  "main": "SimpleServer.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-  "start":"node SimpleServer"
+  "start":"node server"
   },
   "author": "Yogesh",
   "license": "ISC",
