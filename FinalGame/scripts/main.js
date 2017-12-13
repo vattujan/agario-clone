@@ -17,12 +17,9 @@ function preload() {
 var ball;
 var group;
 var asteroid;
-var sun1, sun2, sun3;
 var stage, thumbnail, thumbContainer;
 
-
 function create(){
-    
     game.physics.startSystem(Phaser.Physics.ARCADE);
     gameScale();
     group = game.add.physicsGroup(); 
@@ -56,25 +53,6 @@ function spawnBall(){
     ball.body.setCircle(ball.radius);
     game.camera.follow(ball);
     ball.body.collideWorldBounds = true;
-
-    sun1 = game.add.sprite(game.world.randomX, game.world.randomY, 'sun');
-    game.time.events.loop(Phaser.Timer.SECOND * 2, function(){ 
-        game.add.tween(sun1).to({x: game.world.randomX, y: game.world.randomY}, 
-            5000, Phaser.Easing.Quadratic.InOut, true);}, this);
-    sun1.scale.setTo(0.2, 0.2);        
-    
-    
-    sun2 = game.add.sprite(game.world.randomX, game.world.randomY, 'sun');
-    game.time.events.loop(Phaser.Timer.SECOND * 2, function(){ 
-        game.add.tween(sun2).to({x: game.world.randomX, y: game.world.randomY}, 
-            5000, Phaser.Easing.Quadratic.InOut, true);}, this);
-    sun2.scale.setTo(0.2, 0.2);
-
-    sun3 = game.add.sprite(game.world.randomX, game.world.randomY, 'sun');        
-    game.time.events.loop(Phaser.Timer.SECOND * 2, function(){ 
-        game.add.tween(sun3).to({x: game.world.randomX, y: game.world.randomY}, 
-            5000, Phaser.Easing.Quadratic.InOut, true);}, this);
-    sun3.scale.setTo(0.2, 0.2);
 }    
         
 
@@ -88,15 +66,6 @@ function spawnAsteroids(){
 
 function update(){
     if (game.physics.arcade.overlap(ball, group, overlapHandler, processHandler, this)) {
-        console.log('boom');
-    }
-    if (game.physics.arcade.overlap(sun1, group, overlapHandler, processHandler, this)) {
-        console.log('boom');
-    }
-    if (game.physics.arcade.overlap(sun2, group, overlapHandler, processHandler, this)) {
-        console.log('boom');
-    }
-    if (game.physics.arcade.overlap(sun3, group, overlapHandler, processHandler, this)) {
         console.log('boom');
     }
 
@@ -154,6 +123,5 @@ function render(){
     game.debug.text(ball.width, 85, 32);
     //game.debug.geom(ball, 111111, true, 2);  
     //game.debug.body(ball);
-    game.debug.body(sun1);
 
 }
