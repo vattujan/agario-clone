@@ -10,23 +10,34 @@ function preload() {
     game.stage.backgroundColor = '#111111';
     game.load.image('asteroid', 'img/asteroid.png');
     game.load.image('earth', 'img/ball.png');
-    game.load.image('star', 'img/star.png');
     game.load.image('sun', 'img/sun.gif');
+    game.load.image('background', 'img/background.png');
 }
 
 var ball;
 var group;
 var asteroid;
 var sun1, sun2, sun3;
+var stage, thumbnail, thumbContainer;
+
 
 function create(){
+    
     game.physics.startSystem(Phaser.Physics.ARCADE);
     gameScale();
     group = game.add.physicsGroup(); 
     spawnBall();    
     spawnAsteroids();
-    spawnSun();
+    createMiniMap();
     //game.time.events.repeat(Phaser.Timer.SECOND, 100000, spawn2Asteroids, this);
+}
+
+function createMiniMap(){
+    stage = game.make.bitmapData(game.world.width, game.world.height);
+    thumbnail = game.add.bitmapData(200, 200);
+    thumbContainer = game.add.sprite(5, 45, thumbnail);
+    game.stage.addChild(thumbContainer);
+    
 }
 
 function gameScale(){
@@ -45,33 +56,27 @@ function spawnBall(){
     ball.body.setCircle(ball.radius);
     game.camera.follow(ball);
     ball.body.collideWorldBounds = true;
-}
 
-function spawnSun(){
-        sun1 = game.add.sprite(game.world.randomX, game.world.randomY, 'sun');
-        game.time.events.loop(Phaser.Timer.SECOND * 2, function(){ 
-            game.add.tween(sun1).to({x: game.world.randomX, y: game.world.randomY}, 
-                5000, Phaser.Easing.Quadratic.InOut, true);}, this);
-        sun1.scale.setTo(0.2, 0.2);
-        sun1.body.setCircle(95);
-        sun1.body.collideWorldBounds = true;
+    sun1 = game.add.sprite(game.world.randomX, game.world.randomY, 'sun');
+    game.time.events.loop(Phaser.Timer.SECOND * 2, function(){ 
+        game.add.tween(sun1).to({x: game.world.randomX, y: game.world.randomY}, 
+            5000, Phaser.Easing.Quadratic.InOut, true);}, this);
+    sun1.scale.setTo(0.2, 0.2);        
+    
+    
+    sun2 = game.add.sprite(game.world.randomX, game.world.randomY, 'sun');
+    game.time.events.loop(Phaser.Timer.SECOND * 2, function(){ 
+        game.add.tween(sun2).to({x: game.world.randomX, y: game.world.randomY}, 
+            5000, Phaser.Easing.Quadratic.InOut, true);}, this);
+    sun2.scale.setTo(0.2, 0.2);
+
+    sun3 = game.add.sprite(game.world.randomX, game.world.randomY, 'sun');        
+    game.time.events.loop(Phaser.Timer.SECOND * 2, function(){ 
+        game.add.tween(sun3).to({x: game.world.randomX, y: game.world.randomY}, 
+            5000, Phaser.Easing.Quadratic.InOut, true);}, this);
+    sun3.scale.setTo(0.2, 0.2);
+}    
         
-        sun2 = game.add.sprite(game.world.randomX, game.world.randomY, 'sun');
-        game.time.events.loop(Phaser.Timer.SECOND * 2, function(){ 
-            game.add.tween(sun2).to({x: game.world.randomX, y: game.world.randomY}, 
-                5000, Phaser.Easing.Quadratic.InOut, true);}, this);
-        sun2.scale.setTo(0.2, 0.2);
-        sun2.body.setCircle(95);
-        sun2.body.collideWorldBounds = true;
-        
-        sun3 = game.add.sprite(game.world.randomX, game.world.randomY, 'sun');        
-        game.time.events.loop(Phaser.Timer.SECOND * 2, function(){ 
-            game.add.tween(sun3).to({x: game.world.randomX, y: game.world.randomY}, 
-                5000, Phaser.Easing.Quadratic.InOut, true);}, this);
-        sun3.scale.setTo(0.2, 0.2);
-        sun3.body.setCircle(95);
-        sun3.body.collideWorldBounds = true;   
-}
 
 function spawnAsteroids(){
     for (var i = 0; i < 500; i++) {
@@ -85,12 +90,38 @@ function update(){
     if (game.physics.arcade.overlap(ball, group, overlapHandler, processHandler, this)) {
         console.log('boom');
     }
+    if (game.physics.arcade.overlap(sun1, group, overlapHandler, processHandler, this)) {
+        console.log('boom');
+    }
+    if (game.physics.arcade.overlap(sun2, group, overlapHandler, processHandler, this)) {
+        console.log('boom');
+    }
+    if (game.physics.arcade.overlap(sun3, group, overlapHandler, processHandler, this)) {
+        console.log('boom');
+    }
 
     if (game.physics.arcade.distanceToPointer(ball) > ball.width/4) {
-        game.physics.arcade.moveToPointer(ball, 350);
+        game.physics.arcade.moveToPointer(ball, 450);
     }
     else {
         ball.body.velocity.setTo(0);
+    }
+
+    if (game.time.time < this.nextUpdate){
+        return;
+    }
+    {
+        stage.clear();
+        stage.drawFull(game.world);
+        
+        //  Draw our black border rect
+        thumbnail.rect(0, 0, thumbnail.width, thumbnail.width, '#000');        
+    
+        //  And copy the stage capture to our Thumbnail (offset by 2px for the black border)    
+        thumbnail.copy(stage, 0, 0, stage.width, stage.height, 0, 0, thumbnail.width, thumbnail.width);
+        thumbnail.update();
+
+        this.nextUpdate = game.time.time + this.updateRate;
     }
 }
 
@@ -123,4 +154,6 @@ function render(){
     game.debug.text(ball.width, 85, 32);
     //game.debug.geom(ball, 111111, true, 2);  
     //game.debug.body(ball);
+    game.debug.body(sun1);
+
 }
