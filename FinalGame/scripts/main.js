@@ -10,7 +10,6 @@ function preload() {
     game.stage.backgroundColor = '#111111';
     game.load.image('asteroid', 'img/asteroid.png');
     game.load.image('earth', 'img/ball.png');
-    game.load.image('sun', 'img/sun.gif');
     game.load.image('background', 'img/background.png');
 }
 
@@ -46,7 +45,7 @@ function gameScale(){
 
 function spawnBall(){
     ball = game.add.sprite(game.world.randomX, game.world.randomY, 'earth');
-    game.physics.arcade.enable(ball, asteroid, sun1, sun2, sun3);
+    game.physics.arcade.enable(ball, asteroid);
     ball.anchor.set(0.5, 0.5);
     ball.scale.setTo(0.25, 0.25);
     ball.radius = 95;
