@@ -1,4 +1,3 @@
- 
 var sitePath = process.argv[2] || ".";
 const port = process.env.PORT || 4200;
  
