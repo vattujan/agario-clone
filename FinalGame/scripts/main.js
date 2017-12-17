@@ -1,5 +1,5 @@
 // Create a new Phaser game object with a single state that has 3 functions
-var game = new Phaser.Game(800, 800, Phaser.AUTO, '', {
+var game = new Phaser.Game(0, 0, Phaser.AUTO, '', {
     preload: preload,
     create: create,
     update: update,
@@ -7,7 +7,7 @@ var game = new Phaser.Game(800, 800, Phaser.AUTO, '', {
 });
 
 function preload() {
-    game.stage.backgroundColor = '#111111';
+    game.stage.backgroundColor = "#000000";
     game.load.image('asteroid', 'img/asteroid.png');
     game.load.image('earth', 'img/ball.png');
     game.load.image('background', 'img/background.png');
@@ -32,8 +32,7 @@ function createMiniMap(){
     stage = game.make.bitmapData(game.world.width, game.world.height);
     thumbnail = game.add.bitmapData(200, 200);
     thumbContainer = game.add.sprite(5, 45, thumbnail);
-    game.stage.addChild(thumbContainer);
-    
+    game.stage.addChild(thumbContainer);    
 }
 
 function gameScale(){
