@@ -1,5 +1,5 @@
 // Create a new Phaser game object with a single state that has 3 functions
-var game = new Phaser.Game(0, 0, Phaser.AUTO, '', {
+var game = new Phaser.Game(800, 800, Phaser.CANVAS, '', {
     preload: preload,
     create: create,
     update: update,
@@ -100,8 +100,8 @@ function overlapHandler(player, enemy) {
 
     if (player.overlap(enemy) && player.width > enemy.width) {
         enemy.destroy();
-        player.width += enemy.width/60;
-        player.height += enemy.height/60;
+        player.width += enemy.width/55;
+        player.height += enemy.height/55;
         
         asteroid = group.create(game.world.randomX, game.world.randomY, 'asteroid');
         asteroid.scale.setTo(0.15, 0.15);
@@ -121,5 +121,4 @@ function render(){
     game.debug.text(ball.width, 85, 32);
     //game.debug.geom(ball, 111111, true, 2);  
     //game.debug.body(ball);
-
 }
