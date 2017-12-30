@@ -7,10 +7,8 @@ var game = new Phaser.Game(800, 800, Phaser.CANVAS, '', {
 });
 
 function preload() {
-    game.stage.backgroundColor = "#000000";
     game.load.image('asteroid', 'img/asteroid.png');
     game.load.image('earth', 'img/ball.png');
-    game.load.image('background', 'img/background.png');
 }
 
 var ball;
