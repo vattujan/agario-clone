@@ -19,8 +19,8 @@ var stage, thumbnail, thumbContainer;
 function create(){
     game.physics.startSystem(Phaser.Physics.ARCADE);
     gameScale();
-    group = game.add.physicsGroup(); 
-    spawnBall();    
+    group = game.add.physicsGroup();
+    spawnBall();
     spawnAsteroids();
     createMiniMap();
     //game.time.events.repeat(Phaser.Timer.SECOND, 100000, spawn2Asteroids, this);
