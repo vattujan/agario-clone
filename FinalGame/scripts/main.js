@@ -26,13 +26,6 @@ function create(){
     //game.time.events.repeat(Phaser.Timer.SECOND, 100000, spawn2Asteroids, this);
 }
 
-function createMiniMap(){
-    stage = game.make.bitmapData(game.world.width, game.world.height);
-    thumbnail = game.add.bitmapData(200, 200);
-    thumbContainer = game.add.sprite(5, 45, thumbnail);
-    game.stage.addChild(thumbContainer);    
-}
-
 function gameScale(){
     game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
     game.scale.pageAlignHorizontally = true;
@@ -49,8 +42,7 @@ function spawnBall(){
     ball.body.setCircle(ball.radius);
     game.camera.follow(ball);
     ball.body.collideWorldBounds = true;
-}    
-        
+}  
 
 function spawnAsteroids(){
     for (var i = 0; i < 500; i++) {
@@ -58,6 +50,13 @@ function spawnAsteroids(){
         asteroid.scale.setTo(0.15, 0.15);
         asteroid.body.setCircle(50);
     }
+}
+
+function createMiniMap(){
+    stage = game.make.bitmapData(game.world.width, game.world.height);
+    thumbnail = game.add.bitmapData(200, 200);
+    thumbContainer = game.add.sprite(5, 45, thumbnail);
+    game.stage.addChild(thumbContainer);    
 }
 
 function update(){
