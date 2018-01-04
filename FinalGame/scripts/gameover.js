@@ -14,11 +14,11 @@ var gameoverState = {
         logoLabel.anchor.set(0.5, 0.5);
 
         //score
-        scoreLabel = game.add.text(800, 380,'Your Score: ' + ball.width, {
+        scoreLabel = game.add.text(800, 380, 'Your Score: ' + ball.width, {
             font: '30px Calibri', align: 'center', fill: '#ffffff'
         });
         scoreLabel.anchor.set(0.5, 0.5);
-        
+
         //button
         btnLabel = game.add.text(800, 440, 'Click to Start', {
             font: '30px Calibri', align: 'center', fill: '#ffffff'
@@ -37,7 +37,7 @@ var gameoverState = {
         game.add.tween(btnLabel.scale)
             .to({ x: 1.3, y: 1.3 }, 300, Phaser.Easing.Exponential.Out, true);
         //explosion
-        explode = game.add.sprite(730, 320, 'explosion');
+        explode = game.add.sprite(730, 370, 'explosion');
         explode.animations.add('explosion');
         explode.animations.play('explosion', 20, 1, true);
         //hover sound

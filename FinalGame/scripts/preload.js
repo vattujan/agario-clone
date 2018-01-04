@@ -1,7 +1,7 @@
 
 var preloadState = {
     preload: function () {
-        var loadingLabel = game.add.text(400, 400, 'Loading...',{font: '30px Courier', fill:'#ffffff'});
+        var loadingLabel = game.add.text(400, 400, 'Loading...', { font: '30px Courier', fill: '#ffffff' });
 
         game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
         game.scale.pageAlignHorizontally = true;
@@ -17,7 +17,7 @@ var preloadState = {
         game.load.image('sun', 'assets/sun.gif');
     },
 
-    create:function(){
+    create: function () {
         game.state.start('menu');
     }
 

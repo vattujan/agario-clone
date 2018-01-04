@@ -101,8 +101,9 @@ var playState = {
         if (game.physics.arcade.overlap(ball, enemies)) {
             ball.kill();
             thumbContainer.destroy();
+            music.destroy();
             game.state.start('gameover');
-            return true;
+            // return true;
         }
 
         //asteroids collision
