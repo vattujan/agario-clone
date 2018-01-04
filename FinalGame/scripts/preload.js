@@ -11,9 +11,10 @@ var preloadState = {
         game.load.image('asteroid', 'assets/asteroid.png');
         game.load.image('earth', 'assets/ball.png');
         game.load.audio('hover', 'assets/hover.wav');
-        game.load.spritesheet('explosion', 'assets/explode.png');
+        game.load.audio('got', 'assets/got.mp3');
+        game.load.spritesheet('explosion', 'assets/explode.png', 128, 128, 16);
         game.load.image('background', 'assets/background.png');
-        
+        game.load.image('sun', 'assets/sun.gif');
     },
 
     create:function(){

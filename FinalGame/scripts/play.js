@@ -1,15 +1,40 @@
-var ball;
+
+var ball, sun;
 var group;
 var asteroid;
 var stage, thumbnail, thumbContainer;
 
 var playState = {
+
     create:function() {
         group = game.add.physicsGroup();
-        this.pauseMenu();       
+        enemies = game.add.physicsGroup();
+        this.pauseMenu();
+        this.music();      
         this.spawnBall();
         this.spawnAsteroids();
+        this.spawnSun();
         this.createMiniMap();
+    },
+
+    music:function(){
+        //add music
+        music = game.add.audio('got',0.1,10000);
+        music.play();
+        musicLabel = game.add.text(80, 5, 'Music', {
+            font: '24px Calibri', align: 'center', fill: '#ffffff'});
+        musicLabel.inputEnabled = true;
+        musicLabel.fixedToCamera = true;
+        musicLabel.events.onInputDown.add(function(){
+            music.mute = true;
+            });
+            game.input.onDown.add(this.unmute);
+    },
+
+    unmute:function(event){
+        if(music.mute){
+            music.mute = false;
+        }
     },
 
     pauseMenu:function(){
@@ -18,7 +43,7 @@ var playState = {
             font: '24px Calibri', align: 'center', fill: '#ffffff'});
         pauseLabel.inputEnabled = true;
         pauseLabel.fixedToCamera = true;
-        
+        //onclick
         pauseLabel.events.onInputDown.add(function(){
         game.paused = true;
         menuLabel = game.add.text(pauseLabel.x + game.width/2 - 150, pauseLabel.y + game.height/2 - 50, 'Game Paused', {
@@ -26,7 +51,7 @@ var playState = {
         });
         
         //input listener to unpause
-        game.input.onDown.add(this.unpause, self);
+        game.input.onDown.add(this.unpause);
 
     },
 
@@ -42,8 +67,7 @@ var playState = {
         game.physics.arcade.enable(ball, asteroid);
         ball.anchor.set(0.5, 0.5);
         ball.scale.setTo(0.25, 0.25);
-        ball.radius = 95;
-        ball.body.setCircle(ball.radius);
+        ball.body.setCircle(95);
         game.camera.follow(ball);
         ball.body.collideWorldBounds = true;
     },
@@ -55,6 +79,14 @@ var playState = {
             asteroid.body.setCircle(50);
         }
     },
+
+    spawnSun:function() {
+        for (var i = 0; i < 20; i++) {
+            sun = enemies.create(game.world.randomX, game.world.randomY, 'sun');
+            sun.scale.setTo(0.5, 0.5);
+            sun.body.setCircle(95);
+        }
+    },
     
     createMiniMap:function() {
         stage = game.make.bitmapData(game.world.width, game.world.height);
@@ -64,17 +96,29 @@ var playState = {
     },
 
     update:function() {
-        if (game.physics.arcade.overlap(ball, group, this.overlapHandler, this.processHandler, this)) {
-            console.log('boom');
+
+        //sun collision
+        if (game.physics.arcade.overlap(ball, enemies)) {
+            ball.kill();
+            thumbContainer.destroy();
+            game.state.start('gameover');
+            return true;
         }
-    
+
+        //asteroids collision
+        if (game.physics.arcade.overlap(ball, group, this.overlapHandler, this.processHandler)) {
+            console.log('boom');
+            hover.play();
+        }
+        //movement
         if (game.physics.arcade.distanceToPointer(ball) > ball.width/4) {
             game.physics.arcade.moveToPointer(ball, 450);
         }
         else {
             ball.body.velocity.setTo(0);
         }
-    
+
+        //minimap
         if (game.time.time < this.nextUpdate){
             return;
         }
@@ -113,7 +157,6 @@ var playState = {
             enemy.width += player.width/60;
             enemy.height += player.height/60;
         }
-        
     },
     
     render:function(){
