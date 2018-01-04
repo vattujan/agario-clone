@@ -6,9 +6,35 @@ var stage, thumbnail, thumbContainer;
 var playState = {
     create:function() {
         group = game.add.physicsGroup();
+        this.pauseMenu();       
         this.spawnBall();
         this.spawnAsteroids();
         this.createMiniMap();
+    },
+
+    pauseMenu:function(){
+        //Pause Label
+        pauseLabel = game.add.text(5, 5, 'Pause', {
+            font: '24px Calibri', align: 'center', fill: '#ffffff'});
+        pauseLabel.inputEnabled = true;
+        pauseLabel.fixedToCamera = true;
+        
+        pauseLabel.events.onInputDown.add(function(){
+        game.paused = true;
+        menuLabel = game.add.text(pauseLabel.x + game.width/2 - 150, pauseLabel.y + game.height/2 - 50, 'Game Paused', {
+            font: '50px Calibri', align: 'center', fill: '#ffffff'});
+        });
+        
+        //input listener to unpause
+        game.input.onDown.add(this.unpause, self);
+
+    },
+
+    unpause:function(event){
+        if(game.paused){
+            menuLabel.destroy();
+            game.paused = false;
+        }
     },
 
     spawnBall:function() {
@@ -33,7 +59,7 @@ var playState = {
     createMiniMap:function() {
         stage = game.make.bitmapData(game.world.width, game.world.height);
         thumbnail = game.add.bitmapData(200, 200);
-        thumbContainer = game.add.sprite(5, 45, thumbnail);
+        thumbContainer = game.add.sprite(5, 60, thumbnail);
         game.stage.addChild(thumbContainer);    
     },
 
@@ -92,10 +118,11 @@ var playState = {
     
     render:function(){
         //game.debug.spriteInfo(ball, 32, 32);
-        game.debug.text("Size: ", 32, 32);
-        game.debug.text(ball.width, 85, 32);
+        game.debug.text("Size: ", 5, 50);
+        game.debug.text(ball.width, 60, 50);
         //game.debug.geom(ball, 111111, true, 2);  
         //game.debug.body(ball);
+
     }
 
 };
