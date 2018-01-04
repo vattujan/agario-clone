@@ -7,6 +7,7 @@ var game = new Phaser.Game(800, 800, Phaser.AUTO, 'phaser', {
 });
 
 function preload() {
+    //load assets here
     game.load.image('asteroid', 'img/asteroid.png');
     game.load.image('earth', 'img/ball.png');
 }
