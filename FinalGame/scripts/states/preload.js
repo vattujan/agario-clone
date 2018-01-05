@@ -1,8 +1,10 @@
 
 var preloadState = {
     preload: function () {
-        var loadingLabel = game.add.text(400, 400, 'Loading...', { font: '30px Courier', fill: '#ffffff' });
+        var loadingLabel = game.add.text(600, 400, 'Loading...', { font: '30px Calibri', align: 'center', fill: '#ffffff' });
 
+        //scalemode- EXACT_FIT,NO_SCALE,
+        //RESIZE,SHOW_ALL,USER_SCALE
         game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
         game.scale.pageAlignHorizontally = true;
         game.scale.pageAlignVertically = true;

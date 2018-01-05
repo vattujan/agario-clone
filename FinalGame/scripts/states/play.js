@@ -28,10 +28,10 @@ var playState = {
         musicLabel.events.onInputDown.add(function(){
             music.mute = true;
             });
-            game.input.onDown.add(this.unmute);
+        game.input.onDown.add(this.unmute);
     },
 
-    unmute:function(event){
+    unmute:function(){
         if(music.mute){
             music.mute = false;
         }
@@ -99,18 +99,19 @@ var playState = {
 
         //sun collision
         if (game.physics.arcade.overlap(ball, enemies)) {
-            ball.kill();
+            ball.destroy();
             thumbContainer.destroy();
             music.destroy();
             game.state.start('gameover');
-            // return true;
+            return true;
         }
 
         //asteroids collision
-        if (game.physics.arcade.overlap(ball, group, this.overlapHandler, this.processHandler)) {
+        if (game.physics.arcade.overlap(ball, group, this.processHandler, this.overlapHandler)) {
             console.log('boom');
             hover.play();
         }
+
         //movement
         if (game.physics.arcade.distanceToPointer(ball) > ball.width/4) {
             game.physics.arcade.moveToPointer(ball, 450);
@@ -130,7 +131,7 @@ var playState = {
             //  Draw our black border rect
             thumbnail.rect(0, 0, thumbnail.width, thumbnail.width, '#000');        
         
-            //  And copy the stage capture to our Thumbnail (offset by 2px for the black border)    
+            //  And copy the stage capture to our Thumbnail 
             thumbnail.copy(stage, 0, 0, stage.width, stage.height, 0, 0, thumbnail.width, thumbnail.width);
             thumbnail.update();
     
@@ -165,7 +166,7 @@ var playState = {
         game.debug.text("Size: ", 5, 50);
         game.debug.text(ball.width, 60, 50);
         //game.debug.geom(ball, 111111, true, 2);  
-        //game.debug.body(ball);
+        // game.debug.body(ball);
 
     }
 

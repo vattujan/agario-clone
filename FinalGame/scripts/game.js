@@ -1,4 +1,4 @@
-
+//create a new phaser game object
 var game = new Phaser.Game(800, 800, Phaser.AUTO, 'phaser');
 
 game.state.add('boot', bootState);
